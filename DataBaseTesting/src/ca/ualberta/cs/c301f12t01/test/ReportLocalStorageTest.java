@@ -59,7 +59,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		
 		ds.storeReport(report);
 		Collection<Report> reportList = ds.getGlobalReports(task.getId());
-		assertEquals(1, reportList.size());
+		assertEquals(0, reportList.size());
 		
 	}
 	
