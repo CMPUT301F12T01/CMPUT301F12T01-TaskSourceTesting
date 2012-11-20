@@ -1,6 +1,6 @@
 package ca.ualberta.cs.c301f12t01.test;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import android.test.AndroidTestCase;
@@ -45,7 +45,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeReport(report);
-		Collection<Report> reportList = ds.getLocalReports(task.getId());
+		ArrayList<Report> reportList = ds.getLocalReports(task);
 		assertNotNull(reportList);
 		
 	}
@@ -58,7 +58,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeReport(report);
-		Collection<Report> reportList = ds.getGlobalReports(task.getId());
+		ArrayList<Report> reportList = ds.getGlobalReports(task);
 		assertEquals(0, reportList.size());
 		
 	}
@@ -70,7 +70,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeReport(report);
-		Collection<Report> reportList = ds.getLocalReports(task.getId());
+		ArrayList<Report> reportList = ds.getLocalReports(task);
 		Iterator<Report> iter = reportList.iterator();
 		
 		while (iter.hasNext()){
@@ -90,7 +90,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeReport(report);
-		Collection<Report> reportList = ds.getLocalReports(task.getId());
+		ArrayList<Report> reportList = ds.getLocalReports(task);
 		Iterator<Report> iter = reportList.iterator();
 		
 		while (iter.hasNext()){
