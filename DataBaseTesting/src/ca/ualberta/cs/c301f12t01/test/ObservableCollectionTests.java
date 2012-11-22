@@ -4,7 +4,7 @@ import ca.ualberta.cs.c301f12t01.common.MediaType;
 import ca.ualberta.cs.c301f12t01.common.Request;
 import ca.ualberta.cs.c301f12t01.common.Task;
 import ca.ualberta.cs.c301f12t01.util.DualIndexedObservableCollection;
-
+import ca.ualberta.cs.c301f12t01.util.Message;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
@@ -213,6 +213,60 @@ public class ObservableCollectionTests{
 			@Override
 			public void update (Observable obs, Object obj) {
 				assertNotNull(obj);
+			}
+		};
+		Dummy testCase = new Dummy();
+		testCase.addObserver(test);
+		Task element1 = new Task(UUID.randomUUID());
+		testCase.add(element1);
+		testCase.removeElement(element1);
+	}
+	
+	/**
+	 * So returns the proper message when you add a Task.
+	 */
+	@Test
+	public void addWithNotifyMessage() {
+		Observer test = new Observer() {
+			public void update (Observable obs, Object obj) {
+				Message message = (Message) obj;
+				assertTrue(message.getAction().equals(Message.MessageAction.ADDED));
+			}
+		};
+		Dummy testCase = new Dummy();
+		testCase.addObserver(test);
+		Task element1 = new Task(UUID.randomUUID());
+		testCase.add(element1);
+	}
+	
+	/**
+	 * Returns the proper message when you modify a Task.
+	 */
+	@Test
+	public void replaceWithNotifyMessage() {
+		Observer test = new Observer() {
+			public void update (Observable obs, Object obj) {
+				Message message = (Message) obj;
+				assertTrue(message.getAction().equals(Message.MessageAction.MODIFIED));
+			}
+		};
+		Dummy testCase = new Dummy();
+		testCase.addObserver(test);
+		Task element1 = new Task(UUID.randomUUID());
+		Task element2 = new Task(UUID.randomUUID());
+		testCase.replace(element1, element2);
+	}
+	
+	/**
+	 * Returns the proper message when you remove a Task.
+	 */
+	@Test
+	public void removeWithNotifyMessage() {
+		Observer test = new Observer() {
+			@Override
+			public void update (Observable obs, Object obj) {
+				Message message = (Message) obj;
+				assertTrue(message.getAction().equals(Message.MessageAction.REMOVED)||message.getAction().equals(Message.MessageAction.ADDED));
 			}
 		};
 		Dummy testCase = new Dummy();
