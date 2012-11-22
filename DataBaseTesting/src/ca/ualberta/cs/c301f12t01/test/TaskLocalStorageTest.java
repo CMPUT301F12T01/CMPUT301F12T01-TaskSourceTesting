@@ -1,7 +1,7 @@
 package ca.ualberta.cs.c301f12t01.test;
 
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.UUID;
 
 import android.test.AndroidTestCase;
 import ca.ualberta.cs.c301f12t01.common.Request;
@@ -12,7 +12,7 @@ import ca.ualberta.cs.c301f12t01.testing.TestUtils;
 /**
  * Test class from the DatabaseTesting android project
  * 
- * This class attempts to test all of the functionality
+ * This class attempts to test all of the functionality 
  * of storing and retrieving Tasks and Responses from 
  * the sqlite database
  * 
@@ -44,8 +44,8 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeTask(task);
-		Collection<Task> taskList = ds.getLocalTasks();
-		assertNotNull(taskList);
+		HashMap<UUID,Task> taskHash = ds.getLocalTasks();
+		assertNotNull(taskHash);
 		
 	}
 	
@@ -57,8 +57,8 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeTask(task);
-		Collection<Task> taskList = ds.getGlobalTasks();
-		assertEquals(1, taskList.size());
+		HashMap<UUID,Task> taskHash = ds.getGlobalTasks();
+		assertEquals(1, taskHash.size());
 		
 	}
 	
@@ -69,15 +69,11 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeTask(task);
-		Collection<Task> taskList = ds.getLocalTasks();
-		Iterator<Task> iter = taskList.iterator();
+		HashMap<UUID,Task> taskHash = ds.getLocalTasks();
 		
-		while (iter.hasNext()){
-			Task t = iter.next();
-			if (t.getId().toString().equals(task.getId().toString())) {
-				assertEquals(task.getId().toString(), t.getId().toString());
-			}
-		}
+		Task returnedTask = taskHash.get(task.getId());
+		assertEquals(task.getId().toString(), 
+				returnedTask.getId().toString());
 	}
 	
 	public void test_retrieve_requests() 
@@ -91,18 +87,13 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeTask(task);
-		Collection<Task> taskList = ds.getLocalTasks();
-		Iterator<Task> iter = taskList.iterator();
+		HashMap<UUID,Task> taskHash = ds.getLocalTasks();
 		
-		while (iter.hasNext()){
-			Task t = iter.next();
-			if (t.getId().toString().equals(task.getId().toString())) {
-				
-				for (Request req : t) {
-					//System.out.println(req.getDescription());
-					assertEquals(req.getDescription(), r.getDescription());
-				}
-			}
+		Task returnedTask = taskHash.get(task.getId());
+		
+		for (Request req : returnedTask) {
+			//System.out.println(req.getDescription());
+			assertEquals(req.getDescription(), r.getDescription());
 		}
 	}
 
