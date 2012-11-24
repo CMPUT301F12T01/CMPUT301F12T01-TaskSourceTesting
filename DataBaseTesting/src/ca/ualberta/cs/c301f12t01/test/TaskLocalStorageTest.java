@@ -3,9 +3,11 @@ package ca.ualberta.cs.c301f12t01.test;
 import java.util.HashMap;
 import java.util.UUID;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 import ca.ualberta.cs.c301f12t01.common.Request;
 import ca.ualberta.cs.c301f12t01.common.Task;
+import ca.ualberta.cs.c301f12t01.localStorage.DBInstance;
 import ca.ualberta.cs.c301f12t01.localStorage.DeviceStorage;
 import ca.ualberta.cs.c301f12t01.testing.TestUtils;
 
@@ -30,8 +32,18 @@ public class TaskLocalStorageTest extends AndroidTestCase
 
 	public void test_store_localtask() 
 	{
+		DBInstance instance = new DBInstance(getContext());
+		SQLiteDatabase db = instance.getWritableDatabase();
+		db.execSQL("DROP TABLE IF EXISTS Tasks");
+	    db.execSQL("DROP TABLE IF EXISTS Reports");
+	    db.execSQL("DROP TABLE IF EXISTS Request");
+	    db.execSQL("DROP TABLE IF EXISTS Response");
+	    //instance.onCreate(db);
+		db.close();
+		
 		Task task = TestUtils.makeSimpleTask();
 		task.setLocal();
+		
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeTask(task);
@@ -39,6 +51,8 @@ public class TaskLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_localtask() 
 	{
+		getContext().deleteDatabase("TaskSourceDB.db");
+		
 		Task task = TestUtils.makeSimpleTask();
 		task.setLocal();
 		DeviceStorage ds = new DeviceStorage(getContext());
@@ -51,9 +65,11 @@ public class TaskLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_globaltask() 
 	{
+		getContext().deleteDatabase("TaskSourceDB.db");
+		
 		// put in 1 global task
 		Task task = TestUtils.makeSimpleTask();
-		task.setLocal();
+		task.setGlobal();
 		DeviceStorage ds = new DeviceStorage(getContext());
 		
 		ds.storeTask(task);
@@ -64,6 +80,8 @@ public class TaskLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_samelocaltask() 
 	{
+		getContext().deleteDatabase("TaskSourceDB.db");
+		
 		Task task = TestUtils.makeSimpleTask();
 		task.setLocal();
 		DeviceStorage ds = new DeviceStorage(getContext());
@@ -78,6 +96,8 @@ public class TaskLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_requests() 
 	{
+		getContext().deleteDatabase("TaskSourceDB.db");
+		
 		Task task = TestUtils.makeSimpleTask();
 		task.setLocal();
 		//ADDED BY MITCHELL
