@@ -29,9 +29,13 @@ import ca.ualberta.cs.c301f12t01.testing.TestUtils;
 
 public class ReportLocalStorageTest extends AndroidTestCase
 {
+	public void setup() {
+		getContext().deleteDatabase("TaskSourceDB.db");
+	}
+	
 	public void test_store_localreport() 
 	{
-		getContext().deleteDatabase("TaskSourceDB.db");
+		setup();
 		
 		Task task = TestUtils.makeSimpleTask();
 		Report report = TestUtils.makeSimpleReport(task);
@@ -42,7 +46,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_localreport() 
 	{
-		getContext().deleteDatabase("TaskSourceDB.db");
+		setup();
 		
 		Task task = TestUtils.makeSimpleTask();
 		Report report = TestUtils.makeSimpleReport(task);
@@ -56,7 +60,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_globalreport() 
 	{
-		getContext().deleteDatabase("TaskSourceDB.db");
+		setup();
 		
 		// Put in 1 global report
 		Task task = TestUtils.makeSimpleTask();
@@ -71,7 +75,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_samelocalreport() 
 	{
-		getContext().deleteDatabase("TaskSourceDB.db");
+		setup();
 		
 		Task task = TestUtils.makeSimpleTask();
 		Report report = TestUtils.makeSimpleReport(task);
@@ -91,7 +95,7 @@ public class ReportLocalStorageTest extends AndroidTestCase
 	
 	public void test_retrieve_responses() 
 	{
-		getContext().deleteDatabase("TaskSourceDB.db");
+		setup();
 		
 		Task task = TestUtils.makeSimpleTask();
 		Report report = TestUtils.makeSimpleReport(task);
