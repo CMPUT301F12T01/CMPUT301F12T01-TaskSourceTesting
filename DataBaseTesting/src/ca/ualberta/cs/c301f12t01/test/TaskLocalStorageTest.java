@@ -74,7 +74,7 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		
 		ds.storeTask(task);
 		HashMap<UUID,Task> taskHash = ds.getGlobalTasks();
-		assertEquals(1, taskHash.size());
+		assertEquals(0, taskHash.size());
 		
 	}
 	
