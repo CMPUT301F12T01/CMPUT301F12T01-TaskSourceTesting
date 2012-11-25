@@ -48,7 +48,7 @@ public class ObservableCollectionTests {
     @Test
     public void addNoNotify() {
         Dummy testCase = new Dummy();
-        Task element = new Task(UUID.randomUUID());
+        Task element = new Task("");
         assertTrue(testCase.add(element));
     }
 
@@ -58,7 +58,7 @@ public class ObservableCollectionTests {
     @Test
     public void size() {
         Dummy testCase = new Dummy();
-        Task element = new Task(UUID.randomUUID());
+        Task element = new Task("");
         testCase.add(element);
         assertTrue(testCase.size() == 1);
     }
@@ -78,7 +78,7 @@ public class ObservableCollectionTests {
     @Test
     public void getAt() {
         Dummy testCase = new Dummy();
-        Task element = new Task(UUID.randomUUID());
+        Task element = new Task("");
         testCase.add(element);
         assertTrue(testCase.getAt(0).equals(element));
     }
@@ -90,9 +90,9 @@ public class ObservableCollectionTests {
     @Test
     public void newestLast1() {
         Dummy testCase = new Dummy();
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
-        Task element2 = new Task(UUID.randomUUID());
+        Task element2 = new Task("");
         testCase.add(element2);
         assertTrue(testCase.getAt(1).equals(element2));
     }
@@ -104,9 +104,9 @@ public class ObservableCollectionTests {
     @Test
     public void newestLast2() {
         Dummy testCase = new Dummy();
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
-        Task element2 = new Task(UUID.randomUUID());
+        Task element2 = new Task("");
         testCase.add(element2);
         assertFalse(testCase.getAt(1).equals(element1));
     }
@@ -117,7 +117,7 @@ public class ObservableCollectionTests {
     @Test
     public void indexOf() {
         Dummy testCase = new Dummy();
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
         assertTrue(testCase.grabIndex(element1) == 0);
     }
@@ -128,7 +128,7 @@ public class ObservableCollectionTests {
     @Test
     public void replaceNoNotify1() {
         Dummy testCase = new Dummy();
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
         Request request = new Request(MediaType.TEXT);
         element1.addRequest(request);
@@ -143,7 +143,7 @@ public class ObservableCollectionTests {
     @Test
     public void replaceNoNotify2() {
         Dummy testCase = new Dummy();
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
         Request request = new Request(MediaType.TEXT);
         element1.addRequest(request);
@@ -158,7 +158,7 @@ public class ObservableCollectionTests {
     @Test
     public void removeNoNotify1() {
         Dummy testCase = new Dummy();
-        Task element = new Task(UUID.randomUUID());
+        Task element = new Task("");
         assertTrue(testCase.removeElement(element));
     }
 
@@ -169,9 +169,9 @@ public class ObservableCollectionTests {
     @Test
     public void removeNoNotify2() {
         Dummy testCase = new Dummy();
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
-        Task element2 = new Task(UUID.randomUUID());
+        Task element2 = new Task("");
         testCase.add(element2);
         testCase.removeElement(element1);
         assertTrue(testCase.grabIndex(element2) == 0);
@@ -190,7 +190,7 @@ public class ObservableCollectionTests {
         };
         Dummy testCase = new Dummy();
         testCase.addObserver(test);
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
     }
 
@@ -207,7 +207,7 @@ public class ObservableCollectionTests {
         };
         Dummy testCase = new Dummy();
         testCase.addObserver(test);
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
         Request request = new Request(MediaType.TEXT);
         element1.addRequest(request);
@@ -228,7 +228,7 @@ public class ObservableCollectionTests {
         };
         Dummy testCase = new Dummy();
         testCase.addObserver(test);
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
         testCase.removeElement(element1);
     }
@@ -247,7 +247,7 @@ public class ObservableCollectionTests {
         };
         Dummy testCase = new Dummy();
         testCase.addObserver(test);
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
     }
 
@@ -265,8 +265,8 @@ public class ObservableCollectionTests {
         };
         Dummy testCase = new Dummy();
         testCase.addObserver(test);
-        Task element1 = new Task(UUID.randomUUID());
-        Task element2 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
+        Task element2 = new Task("");
         testCase.replace(element1, element2);
     }
 
@@ -287,7 +287,7 @@ public class ObservableCollectionTests {
         };
         Dummy testCase = new Dummy();
         testCase.addObserver(test);
-        Task element1 = new Task(UUID.randomUUID());
+        Task element1 = new Task("");
         testCase.add(element1);
         testCase.removeElement(element1);
     }
