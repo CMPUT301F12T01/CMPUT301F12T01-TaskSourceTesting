@@ -3,6 +3,8 @@
 	<name>DataBaseTesting</name>
 	<comment></comment>
 	<projects>
+		<project>TaskSource</project>
+		<project>TaskSourcePlainTests</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -7,7 +7,7 @@ import android.test.AndroidTestCase;
 import ca.ualberta.cs.c301f12t01.common.Request;
 import ca.ualberta.cs.c301f12t01.common.Task;
 import ca.ualberta.cs.c301f12t01.localStorage.DeviceStorage;
-import ca.ualberta.cs.c301f12t01.testing.TestUtils;
+import ca.ualberta.cs.c301f12t01.test.TestUtils;
 
 /**
  * Test class from the DatabaseTesting android project
