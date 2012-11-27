@@ -54,7 +54,39 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		
 		ds.storeTask(task);
 		HashMap<UUID,Task> taskHash = ds.getLocalTasks();
-		assertNotNull(taskHash);
+		assertEquals(1, taskHash.size());
+		
+	}
+	
+	public void test_remove_localtask() 
+	{
+		setup();
+		
+		Task task = TestUtils.makeSimpleTask();
+		task.setLocal();
+		DeviceStorage ds = new DeviceStorage(getContext());
+		
+		ds.storeTask(task);
+		ds.removeTask(task);
+		HashMap<UUID,Task> taskHash = ds.getLocalTasks();
+		assertEquals(0, taskHash.size());
+		
+	}
+	
+	public void test_update_task() 
+	{
+		setup();
+		
+		Task task = TestUtils.makeSimpleTask();
+		task.setLocal();
+		DeviceStorage ds = new DeviceStorage(getContext());
+		
+		ds.storeTask(task);
+		task.setGlobal();
+		ds.updateTask(task);
+		HashMap<UUID,Task> taskHash = ds.getGlobalTasks();
+		HashMap<UUID,Task> taskHash2 = ds.getOwnTasks(task.getUser());
+		assertEquals(taskHash.get(task.getId()).getId(), taskHash2.get(task.getId()).getId());
 		
 	}
 	

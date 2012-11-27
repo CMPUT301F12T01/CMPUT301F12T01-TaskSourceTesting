@@ -6,6 +6,7 @@ import java.util.Iterator;
 import android.test.AndroidTestCase;
 import ca.ualberta.cs.c301f12t01.common.Report;
 import ca.ualberta.cs.c301f12t01.common.Response;
+import ca.ualberta.cs.c301f12t01.common.Sharing;
 import ca.ualberta.cs.c301f12t01.common.Task;
 import ca.ualberta.cs.c301f12t01.common.TextResponse;
 import ca.ualberta.cs.c301f12t01.localStorage.DeviceStorage;
@@ -54,7 +55,39 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		
 		ds.storeReport(report);
 		ArrayList<Report> reportList = ds.getLocalReports(task);
-		assertNotNull(reportList);
+		assertEquals(1, reportList.size());
+		
+	}
+	
+	public void test_remove_localreport() 
+	{
+		setup();
+		
+		Task task = TestUtils.makeSimpleTask();
+		Report report = TestUtils.makeSimpleReport(task);
+		DeviceStorage ds = new DeviceStorage(getContext());
+		
+		ds.storeReport(report);
+		ds.removeReport(report);
+		ArrayList<Report> reportList = ds.getLocalReports(task);
+		assertEquals(0, reportList.size());
+		
+	}
+	
+	public void test_update_report() 
+	{
+		setup();
+		
+		Task task = TestUtils.makeSimpleTask();
+		Report report = TestUtils.makeSimpleReport(task);
+		DeviceStorage ds = new DeviceStorage(getContext());
+		
+		ds.storeReport(report);
+		report.setSharing(Sharing.TASK_CREATOR);
+		ds.updateReport(report);
+		ArrayList<Report> reportList = ds.getTaskCreatorReports(task);
+		ArrayList<Report> reportList2 = ds.getReports(task);
+		assertEquals(reportList2.get(0).getId(), reportList.get(0).getId());
 		
 	}
 	
