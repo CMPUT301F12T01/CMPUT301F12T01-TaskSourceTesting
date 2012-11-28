@@ -30,10 +30,16 @@ import ca.ualberta.cs.c301f12t01.test.TestUtils;
 
 public class ReportLocalStorageTest extends AndroidTestCase
 {
+	/**
+	 * Initial setup that removes a remaining database
+	 */
 	public void setup() {
 		getContext().deleteDatabase("TaskSourceDB.db");
 	}
 	
+	/**
+	 * Test to make sure you can store a report
+	 */
 	public void test_store_localreport() 
 	{
 		setup();
@@ -45,6 +51,9 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		ds.storeReport(report);
 	}
 	
+	/**
+	 * Test if you can retrieve a local report
+	 */
 	public void test_retrieve_localreport() 
 	{
 		setup();
@@ -59,6 +68,10 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Test if you can remove a local report that 
+	 * exists in the database
+	 */
 	public void test_remove_localreport() 
 	{
 		setup();
@@ -74,6 +87,10 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Test if you can update a report that 
+	 * exists in the database
+	 */
 	public void test_update_report() 
 	{
 		setup();
@@ -91,6 +108,10 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Test if you can retrieve global reports
+	 * from the database
+	 */
 	public void test_retrieve_globalreport() 
 	{
 		setup();
@@ -106,6 +127,11 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Test if you can retrieve a local report
+	 * from the database but be rigorous that it is
+	 * the exact same report that was just put in
+	 */
 	public void test_retrieve_samelocalreport() 
 	{
 		setup();
@@ -126,6 +152,11 @@ public class ReportLocalStorageTest extends AndroidTestCase
 		}
 	}
 	
+	/**
+	 * Test that when you store a report with its
+	 * responses, that you can obtain the report with
+	 * the responses in tack and correct.
+	 */
 	public void test_retrieve_responses() 
 	{
 		setup();

@@ -20,6 +20,9 @@ import ca.ualberta.cs.c301f12t01.localStorage.DeviceStorage;
 
 public class DeviceStorageTest extends AndroidTestCase
 {
+	/**
+	 * Make sure you can get an instance of the device storage
+	 */
 	public void test_get_database()
 	{
 		DeviceStorage ds = new DeviceStorage(getContext());

@@ -28,10 +28,16 @@ import ca.ualberta.cs.c301f12t01.test.TestUtils;
 public class TaskLocalStorageTest extends AndroidTestCase
 {
 	
+	/**
+	 * Initial setup that removes a remaining database
+	 */
 	public void setup() {
 		getContext().deleteDatabase("TaskSourceDB.db");
 	}
 
+	/**
+	 * Check if a task can be stored into the database
+	 */
 	public void test_store_localtask() 
 	{
 		setup();
@@ -44,6 +50,10 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		ds.storeTask(task);
 	}
 	
+	/**
+	 * Test if a local task that was stored can
+	 * be retrieved
+	 */
 	public void test_retrieve_localtask() 
 	{
 		setup();
@@ -58,6 +68,10 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Test if a task stored in the database can be
+	 * removed from the database
+	 */
 	public void test_remove_localtask() 
 	{
 		setup();
@@ -73,6 +87,10 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Test if a task stored in the database can 
+	 * be updated in the database
+	 */
 	public void test_update_task() 
 	{
 		setup();
@@ -90,6 +108,10 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Test if a global task can be retrieved 
+	 * from the database
+	 */
 	public void test_retrieve_globaltask() 
 	{
 		setup();
@@ -105,6 +127,11 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		
 	}
 	
+	/**
+	 * Again retrieve a task but be 
+	 * rigorous about it being the same task
+	 * that was initially stored
+	 */
 	public void test_retrieve_samelocaltask() 
 	{
 		setup();
@@ -121,6 +148,12 @@ public class TaskLocalStorageTest extends AndroidTestCase
 				returnedTask.getId().toString());
 	}
 	
+	/**
+	 * When storing a task that has requests,
+	 * make sure that you get get back the same
+	 * reconstructed task that contains the 
+	 * same requests
+	 */
 	public void test_retrieve_requests() 
 	{
 		setup();
