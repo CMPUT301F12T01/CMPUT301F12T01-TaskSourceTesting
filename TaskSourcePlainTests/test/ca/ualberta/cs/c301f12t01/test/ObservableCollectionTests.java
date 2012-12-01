@@ -153,6 +153,17 @@ public class ObservableCollectionTests {
     }
 
     /**
+     * Check to see if it catches when UUID's are not the same
+     */
+    @Test
+    public void replaceWithNotify3() {
+        Dummy testCase = new Dummy();
+    	Task element1 = new Task("");
+    	Task element2 = new Task("");
+    	assertFalse(testCase.replace(element1, element2));
+    }
+    
+    /**
      * Check to see if removeNoNotify Succeeds.
      */
     @Test
@@ -214,6 +225,7 @@ public class ObservableCollectionTests {
         Task element2 = element1;
         testCase.replace(element1, element2);
     }
+    
 
     /**
 	 * 
