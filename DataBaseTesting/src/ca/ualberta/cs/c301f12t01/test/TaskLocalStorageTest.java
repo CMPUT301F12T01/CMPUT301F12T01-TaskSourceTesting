@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import android.test.AndroidTestCase;
+import android.widget.Gallery;
 import ca.ualberta.cs.c301f12t01.common.Request;
 import ca.ualberta.cs.c301f12t01.common.Task;
 import ca.ualberta.cs.c301f12t01.localStorage.DeviceStorage;
@@ -172,6 +173,102 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		Task returnedTask = taskHash.get(task.getId());
 		
 		assertEquals(returnedTask.getRequest(1).getDescription(), r.getDescription());
+		
+	}
+	
+	public void test_globalTasksDoesNotCoerceSharingMode() {
+		setup();
+		
+		Task localTask = TestUtils.makeSimpleTask();
+		localTask.setSummary("this is local");
+		localTask.setLocal();
+
+		assert localTask.isLocal();
+		
+		Task globalTask = TestUtils.makeSimpleTask();
+		globalTask.setSummary("this is global");
+		globalTask.setGlobal();
+
+		assert localTask.isGlobal();
+
+		DeviceStorage ds = new DeviceStorage(getContext());
+		
+		ds.storeTask(globalTask);
+		ds.storeTask(localTask);
+		
+		HashMap <UUID, Task> globalTasks = ds.getGlobalTasks();
+
+		assertTrue("Global tasks returns more tasks than is neccessary", globalTasks.size() == 1);
+		
+		
+	}
+	
+	
+	public void test_GetGlobalOnlyReturnsGlobalTasks() {
+		setup();
+		
+		Task localTask = TestUtils.makeSimpleTask();
+		localTask.setSummary("this is local");
+		localTask.setLocal();
+		assert localTask.isLocal();
+		
+		Task globalTask = TestUtils.makeSimpleTask();
+		globalTask.setSummary("ths is global");
+		globalTask.setGlobal();
+
+		assert localTask.isGlobal();
+
+		DeviceStorage ds = new DeviceStorage(getContext());
+		
+		ds.storeTask(globalTask);
+		ds.storeTask(localTask);
+		
+		HashMap <UUID, Task> globalTasks = ds.getGlobalTasks();
+		
+		
+		boolean allGlobal = true; 
+		for (Task task : globalTasks.values()) {
+			if (task.isLocal()) 
+				allGlobal = false;
+		}
+		
+		assertTrue("Found local task in global tasks", allGlobal);
+		
+		
+	}
+	
+	public void test_GetLocalOnlyReturnsLocalTasks() {
+		setup();
+		
+		Task localTask = TestUtils.makeSimpleTask();
+		localTask.setSummary("this is local");
+		localTask.setLocal();
+		assert localTask.isLocal();
+		
+		Task globalTask = TestUtils.makeSimpleTask();
+		globalTask.setSummary("ths is global");
+		globalTask.setGlobal();
+
+		assert localTask.isGlobal();
+
+		DeviceStorage ds = new DeviceStorage(getContext());
+		
+		ds.storeTask(globalTask);
+		ds.storeTask(localTask);
+		
+		HashMap <UUID, Task> localTasks = ds.getLocalTasks();
+		
+		boolean allLocal = true; 
+		for (Task task : localTasks.values()) {
+			if (task.isGlobal()) {
+				allLocal = false;
+			}
+		}
+		
+		System.err.println(allLocal);
+		
+		assertTrue("Found global task in local tasks", allLocal);
+		
 		
 	}
 
