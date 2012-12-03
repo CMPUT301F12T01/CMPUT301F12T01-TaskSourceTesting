@@ -171,10 +171,8 @@ public class TaskLocalStorageTest extends AndroidTestCase
 		
 		Task returnedTask = taskHash.get(task.getId());
 		
-		for (Request req : returnedTask) {
-			//System.out.println(req.getDescription());
-			assertEquals(req.getDescription(), r.getDescription());
-		}
+		assertEquals(returnedTask.getRequest(1).getDescription(), r.getDescription());
+		
 	}
 
 }
