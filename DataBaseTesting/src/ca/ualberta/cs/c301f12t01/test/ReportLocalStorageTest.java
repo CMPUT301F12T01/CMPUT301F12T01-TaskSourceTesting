@@ -10,7 +10,6 @@ import ca.ualberta.cs.c301f12t01.common.Sharing;
 import ca.ualberta.cs.c301f12t01.common.Task;
 import ca.ualberta.cs.c301f12t01.common.TextResponse;
 import ca.ualberta.cs.c301f12t01.localStorage.DeviceStorage;
-import ca.ualberta.cs.c301f12t01.test.TestUtils;
 
 /**
  * Test class from the DatabaseTesting android project
