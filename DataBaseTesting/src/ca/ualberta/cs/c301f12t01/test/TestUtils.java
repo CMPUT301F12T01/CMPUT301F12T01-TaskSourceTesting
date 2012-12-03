@@ -44,6 +44,7 @@ public class TestUtils {
 		Task t = new Task(TEST_USER);
 		t.setDescription("This is a longer description");
 		t.setSummary("A short summary");
+		t.addRequest(TestUtils.makeSimpleRequest());
 		return t;		
 	}	
 	
